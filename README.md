@@ -97,16 +97,34 @@ Here’s how the pipeline works step by step:
 Add screenshots to showcase your project visually:
 
 S3 Buckets (Extract & Load)
+![CloudPipe ETL Pipeline](Screenshots/s3_bucket.png)
+![CloudPipe ETL Pipeline](Screenshots/extract.png)
+![CloudPipe ETL Pipeline](Screenshots/load.png)
 
 Lambda Function Configuration
 
+![CloudPipe ETL Pipeline](Screenshots/lambda.png)
+
 Glue ETL Job & Transformations
+
+![CloudPipe ETL Pipeline](Screenshots/glue.png)
 
 Athena Queries
 
-SNS Notifications
+![CloudPipe ETL Pipeline](Screenshots/athena.png)
 
-EventBridge & CloudWatch Logs
+SNS Notification
+
+![CloudPipe ETL Pipeline](Screenshots/SNS.png)
+
+EventBridge & CloudWatch Log
+
+![CloudPipe ETL Pipeline](Screenshots/EventBridge.png)
+![CloudPipe ETL Pipeline](Screenshots/CloudWatch.png)
+
+Email Notification
+
+![CloudPipe ETL Pipeline](Screenshots/Email_Notification.png)
 
 ---
 
