@@ -12,7 +12,7 @@ This project demonstrates how to build a serverless, event-driven data pipeline,
 
 Here’s how the pipeline works step by step:
 
-![CloudPipe ETL Pipeline](flowchart(2).png)
+![CloudPipe ETL Pipeline](flowchart (2).png)
 
 ---
 
