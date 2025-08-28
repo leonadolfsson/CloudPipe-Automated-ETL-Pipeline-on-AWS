@@ -1,0 +1,145 @@
+Execution ID,Query,Start time,Status,Run time,Data scanned,Query engine version used,Encryption
+75e9c637-0daf-4bb3-ba25-10e4442f5201,"SELECT passengerid,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:44:31.894+05:30,SUCCEEDED,670 ms,3.54 KB,Athena engine version 3,
+c9324abb-b678-4010-b372-6933e99db84d,"SELECT passengerid,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:43:22.437+05:30,FAILED,433 ms,0 MB,Athena engine version 3,
+1e43b113-b5c5-4d18-8270-3008fda0bf48,"CREATE TABLE etl_output_db.load_clean
+WITH (
+    format = 'PARQUET',
+    external_location = 's3://your-bucket/load_clean/'
+) AS
+SELECT
+    CAST(passengerid AS INT) AS passengerid,
+    CAST(survived AS INT) AS survived,
+    CAST(pclass AS INT) AS pclass,
+    name,
+    sex,
+    CAST(age AS FLOAT) AS age,
+    CAST(sibsp AS INT) AS sibsp,
+    CAST(parch AS INT) AS parch,
+    ticket,
+    CAST(fare AS FLOAT) AS fare,
+    cabin,
+    embarked
+FROM etl_output_db.load",2025-08-27T21:40:16.755+05:30,FAILED,218 ms,0 MB,Athena engine version 3,
+a1d0b062-c637-4a67-be70-426820f81ca4,DESCRIBE load,2025-08-27T21:38:44.707+05:30,SUCCEEDED,788 ms,0 MB,Athena engine version 3,
+92970069-1241-4a68-8405-86743eb53fb5,"CREATE TABLE etl_output_db.load_clean
+WITH (
+    format = 'PARQUET',
+    external_location = 's3://your-bucket/load_clean/'
+) AS
+SELECT
+    TRY_CAST(passengerid AS INT) AS passengerid,
+    other_column1,
+    other_column2
+FROM etl_output_db.load
+WHERE TRY_CAST(passengerid AS INT) IS NOT NULL",2025-08-27T21:37:15.006+05:30,FAILED,235 ms,0 MB,Athena engine version 3,
+177c9bd3-007d-4f44-8f1a-36b5bd4a991d,"SELECT TRY_CAST(passengerid AS INT) AS passengerid_int,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load
+WHERE TRY_CAST(passengerid AS INT) IS NOT NULL
+GROUP BY TRY_CAST(passengerid AS INT)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:32:39.188+05:30,FAILED,274 ms,7.17 KB,Athena engine version 3,
+c8965d52-e5d0-4ed4-8770-8421036692a8,"SELECT TRY_CAST(passengerid AS INT) AS passengerid_int,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load_fixed
+WHERE TRY_CAST(passengerid AS INT) IS NOT NULL
+GROUP BY TRY_CAST(passengerid AS INT)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:32:32.300+05:30,FAILED,217 ms,0 MB,Athena engine version 3,
+3f66a98a-1888-4ba4-9fd7-b9b6bc5124a1,"SELECT CAST(passengerid AS INT) AS passengerid_int,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load
+WHERE regexp_like(passengerid, '^[0-9]+$')  -- keep only numeric passengerid
+GROUP BY CAST(passengerid AS INT)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:28:24.239+05:30,FAILED,384 ms,7.17 KB,Athena engine version 3,
+bf68faaf-4c4c-496a-b4ca-b85de924aeee,"SELECT CAST(passengerid AS INT) AS passengerid_int,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load_fixed
+WHERE regexp_like(passengerid, '^[0-9]+$')  -- keep only numeric passengerid
+GROUP BY CAST(passengerid AS INT)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:28:16.366+05:30,FAILED,242 ms,0 MB,Athena engine version 3,
+7029e813-b3c4-4cef-828d-455cba473813,"SELECT CAST(passengerid AS INT) AS passengerid_int,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY CAST(passengerid AS INT)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:25:47.952+05:30,FAILED,237 ms,7.17 KB,Athena engine version 3,
+a159731b-7626-4f33-9933-aa6757d4e9d9,"SELECT CAST(passengerid AS INT) AS passengerid_int,
+       COUNT(*) AS dup_count
+FROM etl_output_db.load_fixed
+GROUP BY CAST(passengerid AS INT)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:25:35.559+05:30,FAILED,225 ms,0 MB,Athena engine version 3,
+ce3cd335-6d49-445b-9da7-750d151dfc51,"SELECT CAST(passengerid AS VARCHAR) AS passengerid_str, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY CAST(passengerid AS VARCHAR)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:23:41.240+05:30,FAILED,672 ms,3.54 KB,Athena engine version 3,
+fef24cf5-9156-498c-83e9-0c7d3c92e438,SHOW CREATE TABLE etl_output_db.load,2025-08-27T21:12:15.906+05:30,SUCCEEDED,533 ms,0 MB,Athena engine version 3,
+84b4cb13-0c89-4923-95cb-4a7a080f4d12,SHOW COLUMNS IN etl_output_db.load,2025-08-27T21:11:34.330+05:30,SUCCEEDED,238 ms,0 MB,Athena engine version 3,
+efccc4ec-3805-4fdb-869e-6c1e93843d26,"SELECT try_cast(from_utf8(passengerid) AS integer) AS passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY try_cast(from_utf8(passengerid) AS integer)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:10:46.506+05:30,FAILED,121 ms,0 MB,Athena engine version 3,
+1e27a8aa-f9a3-4347-937a-61bed90735f4,"SELECT from_utf8(passengerid) AS passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY from_utf8(passengerid)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:10:21.567+05:30,FAILED,142 ms,0 MB,Athena engine version 3,
+93f403bb-107e-43f1-bff2-43571c1893f8,"SELECT passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:08:39.503+05:30,FAILED,251 ms,3.54 KB,Athena engine version 3,
+b457f440-dbd9-44b5-8ee6-0425b9d787e6,"SELECT passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:07:59.956+05:30,FAILED,250 ms,3.54 KB,Athena engine version 3,
+dc5c84f6-93fb-404e-a8f6-3144b8320deb,"SELECT passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:07:46.809+05:30,FAILED,279 ms,0 MB,Athena engine version 3,
+710a264a-a090-4707-bb21-3422bcbc87a3,"SELECT CAST(passengerid AS VARCHAR) AS passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY CAST(passengerid AS VARCHAR)
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:05:55.056+05:30,FAILED,349 ms,7.17 KB,Athena engine version 3,
+223a4983-4c03-42d9-b8cf-b1bab7f4a6ca,"SELECT passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:04:13.381+05:30,FAILED,343 ms,7.17 KB,Athena engine version 3,
+5af56e18-52d3-471d-a416-f5a3cdb44052,"SELECT passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T21:00:22.196+05:30,SUCCEEDED,389 ms,7.17 KB,Athena engine version 3,
+c07ebf1d-6c2b-4e26-87fc-2410b835c4c1,"SELECT passengerid, COUNT(*) AS dup_count
+FROM etl_output_db.load
+GROUP BY passengerid
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T20:22:21.474+05:30,SUCCEEDED,483 ms,7.17 KB,Athena engine version 3,
+14ec23d5-20ae-4695-98a6-5ba84a27ad4b,SHOW COLUMNS IN etl_output_db.load,2025-08-27T20:21:46.897+05:30,SUCCEEDED,287 ms,0 MB,Athena engine version 3,
+53e07127-4145-492d-b7d6-1eb6bac9fe4b,"SELECT id, COUNT(*) 
+FROM ""AwsDataCatalog"".""etl_output_db"".""load""
+GROUP BY id
+HAVING COUNT(*) > 1
+LIMIT 20",2025-08-27T20:19:50.708+05:30,FAILED,125 ms,0 MB,Athena engine version 3,
+ce84ef78-e377-42f5-b2c5-ec244e91b8e3,"SELECT COUNT(*) AS total_rows 
+FROM ""AwsDataCatalog"".""etl_output_db"".""load""",2025-08-27T20:19:26.176+05:30,SUCCEEDED,363 ms,0 MB,Athena engine version 3,
+ca181834-2c40-42f8-abf3-f1363bd4faa3,"SELECT * FROM ""AwsDataCatalog"".""etl_output_db"".""load"" limit 10",2025-08-27T20:17:54.570+05:30,SUCCEEDED,489 ms,32.74 KB,Athena engine version 3,
